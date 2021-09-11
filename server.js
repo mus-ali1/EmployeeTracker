@@ -18,3 +18,14 @@ const PORT = 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
+// Creates connection to database
+
+const connection = mysql.createConnection({
+    host: "localhost",
+    port: 3000,
+    user: "root",
+    password: process.env.DB_PASSWORD,
+    database: "employeesDB",
+});
+
