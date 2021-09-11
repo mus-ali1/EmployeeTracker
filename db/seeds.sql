@@ -17,3 +17,15 @@ VALUES
 ('Project Manager', 100000, 4),
 ('Operations Manager', 90000, 4);
 
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES 
+('Davis', 'Simpson', 2, null),
+('Jude', 'Law', 1, 1),
+('Daniel', 'Craig', 4, null),
+('Sarah', 'Jones', 3, 3),
+('Tyler', 'Davids', 6, null),
+('Tyrone', 'Roberts', 5, 5),
+('Juel', 'Santana', 7, null),
+('Ricky', 'Rose', 8, 7);
+
