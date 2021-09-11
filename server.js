@@ -20,12 +20,25 @@ app.use(express.json());
 
 
 // Creates connection to database
-
 const connection = mysql.createConnection({
+
     host: "localhost",
     port: 3000,
     user: "root",
     password: process.env.DB_PASSWORD,
     database: "employeesDB",
+});
+
+// This is a error handling function which throws an error if there is no connection to our database and 
+// runs our initTracker function if the connection is successfull.
+connection.connect(function (err) {
+    if (err) {
+        console.error("error connecting: " + err.stack);
+        return;
+    }
+
+    console.log("connected as id " + connection.threadId);
+
+    initTracker();
 });
 
