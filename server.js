@@ -4,6 +4,10 @@ const inquirer = require("inquirer");
 const express = require("express");
 const cTable = require("console.table");
 
+
+// Requires and configure dotenv package
+require('dotenv').config()
+
 // This app starts a server and listens on port 3000 for connections
 const app = express();
 const PORT = 3000;
@@ -13,3 +17,4 @@ const PORT = 3000;
 // (express.urlencoded) allows the incoming request object to be recognised as a strings or arrays.
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
