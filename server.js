@@ -90,3 +90,48 @@ function initTracker() {
             ]
         })
 
+
+        // This function allows the relevant function for each case to run if it is selected, the switch expression
+        //evaluates the expression inputed this is compared with the value of each case in the structure if there is a match, the
+        // associated block of code is executed, the break keyword breaks out of the switch block. This will stop the execution of more execution of code and/or case testing inside the block.
+        .then(function (answer) {
+            switch (answer.action) {
+                case "view":
+                    viewAll();
+                    break;
+
+                case "addDepartment":
+                    addDepartment();
+                    break;
+
+                case "addRole":
+                    addRole();
+                    break;
+
+                case "addEmployee":
+                    addEmployee();
+                    break;
+
+                case "update":
+                    updateRole();
+                    break;
+
+                case "deleteDepartment":
+                    deleteDepartment();
+                    break;
+
+                case "deleteRole":
+                    deleteRole();
+                    break;
+
+                case "deleteEmployee":
+                    deleteEmployee();
+                    break;
+
+                case "exit":
+                    connection.end();
+                    break;
+            }
+        });
+}
+
