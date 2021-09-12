@@ -137,6 +137,16 @@ function initTracker() {
 
 
 
+// This function allows us to query our database and display all employees, utilise console.table to show table of employees on terminal.
+function displayAllEmployees() {
+    let query = "SELECT * FROM employee ";
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+
+        console.log("\n\n ** Full Employee list ** \n");
+        console.table(res);
+    });
+}
 
 // This function allows us to query our database and display all roles, utilise console.table to show table of roles on terminal.
 function displayAllRoles() {
