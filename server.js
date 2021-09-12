@@ -134,6 +134,21 @@ function initTracker() {
             }
         });
 }
+
+
+
+
+// This function allows us to query our database and display all roles, utilise console.table to show table of roles on terminal.
+function displayAllRoles() {
+    let query = "SELECT * FROM roles ";
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+
+        console.log("\n\n ** Full Role list ** \n");
+        console.table(res);
+    });
+}
+
 // This function allows us to query our database and display all departments, utilise console.table to show table of departments on terminal.
 function displayAllDepartments() {
     let query = "SELECT * FROM department ";
@@ -144,7 +159,6 @@ function displayAllDepartments() {
         console.table(res);
     });
 }
-
 
 // Start our server so that it can begin listening to client requests.
 app.listen(PORT, () => {
