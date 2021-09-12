@@ -214,6 +214,53 @@ function addRole() {
         });
 }
 
+// This function allows user to add employee, this block of code runs when the case addEmployee in initTracker() is chosen, the user is prompted and a 
+//connection.query function then runs which communicates with the database and inserts new employee into the data set, error handling function to confirm 
+//role has being added, if not throw err.
+function addEmployee() {
+    inquirer
+        .prompt([
+            {
+                name: "firstName",
+                type: "input",
+                message: "What is the employee's first name?",
+            },
+            {
+                name: "lastName",
+                type: "input",
+                message: "What is the employee's last name?",
+            },
+            {
+                name: "roleId",
+                type: "input",
+                message: "What is this employee's role ID?",
+            },
+            {
+                name: "managerId",
+                type: "input",
+                message: "What is this employee's manager ID?",
+            },
+        ])
+        .then((answer) => {
+            console.log("Adding a new employee...\n");
+            connection.query(
+                `INSERT INTO employee SET ?`,
+                {
+                    first_name: answer.firstName,
+                    last_name: answer.lastName,
+                    role_id: answer.roleId,
+                    manager_id: answer.managerId,
+                },
+                function (err, res) {
+                    if (err) throw err;
+                    console.log("New role added!\n");
+                    // Call updateProduct AFTER the INSERT completes
+                    initTracker();
+                }
+            );
+        });
+}
+
 // This function allows us to query our database and display all employees, utilise console.table to show table of employees on terminal.
 function displayAllEmployees() {
     let query = "SELECT * FROM employee ";
