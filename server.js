@@ -234,6 +234,35 @@ function deleteRole() {
         });
 }
 
+function deleteEmployee() {
+    // display department table so user can easily view all IDs
+    displayAllEmployees();
+
+    inquirer
+        .prompt({
+            name: "employeeId",
+            type: "input",
+            message: "Enter the ID of the employee you want to delete",
+        })
+
+        //Connects to our Database 
+        .then((answer) => {
+            console.log("Deleting employee...\n");
+            connection.query(
+                "DELETE FROM employee WHERE ?",
+                {
+                    id: answer.employeeId,
+                },
+                function (err, res) {
+                    if (err) throw err;
+                    console.log("Employee deleted!\n");
+                }
+            );
+
+            initTracker();
+        });
+}
+
 
 
 // This function allows user to add department, this block of code runs when the case addDepartment in initTracker() is chosen, the user is prompted and a 
