@@ -42,7 +42,7 @@ connection.connect(function (err) {
     initTracker();
 });
 
-
+//This function utilises inquirer dependency and through a series of prompts gives the user choices to update the employee tracker management system.
 function initTracker() {
     inquirer
         .prompt({
