@@ -264,6 +264,60 @@ function deleteEmployee() {
 }
 
 
+function updateRole() {
+
+    //Declare employeeID variable to use later
+    let employeeId;
+
+    // Display employee table so user can easily view all IDs
+    displayAllEmployees();
+
+
+    //Use inquirer dependency to prompt user
+    inquirer
+        .prompt({
+            name: "employeeId",
+            type: "input",
+            message: "Enter the ID of the employee you want to update",
+        })
+
+        .then((answer) => {
+            employeeId = answer.employeeId;
+
+            // display roles table so user can easily decide select a role ID
+            displayAllRoles();
+
+            inquirer
+                .prompt({
+                    name: "roleId",
+                    type: "input",
+                    message: "Enter the role ID you want the user to have",
+                })
+                .then((answer) => {
+                    console.log("Updating employee role...\n");
+
+                    //communicates with our database to update employee role
+                    connection.query(
+                        "UPDATE employee SET ? WHERE ?",
+                        [
+                            {
+                                role_id: answer.roleId,
+                            },
+                            {
+                                id: employeeId,
+                            },
+                        ],
+                        function (err, res) {
+                            if (err) throw err;
+                            console.log("Employee role updated!\n");
+                            // Call updateProduct AFTER the INSERT completes
+                            initTracker();
+                        }
+                    );
+                });
+        });
+}
+
 
 // This function allows user to add department, this block of code runs when the case addDepartment in initTracker() is chosen, the user is prompted and a 
 //connection.query function then runs which communicates with the database and inserts new department into the data set, error handling function to confirm 
