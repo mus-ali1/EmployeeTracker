@@ -137,6 +137,41 @@ function initTracker() {
 
 
 
+
+
+// This function allows user to add department, this block of code runs when the case addDepartment in initTracker() is chosen, the user is prompted and a 
+//connection.query function then runs which communicates with the database and inserts new department into the data set, error handling function to confirm 
+//department has being added, if not throw err.
+function addDepartment() {
+    inquirer
+        .prompt({
+            name: "department_name",
+            type: "input",
+            message: "What is the department name?",
+        })
+        .then((answer) => {
+            console.log("Adding a new department...\n");
+            connection.query(
+                `INSERT INTO department SET ?`,
+                {
+                    department_name: answer.department_name,
+                },
+                function (err, res) {
+                    if (err) throw err;
+                    console.log("New department added!\n");
+                    // Call updateProduct AFTER the INSERT completes
+                    initTracker();
+                }
+            );
+        });
+}
+
+
+
+
+
+
+
 // This function allows us to query our database and display all employees, utilise console.table to show table of employees on terminal.
 function displayAllEmployees() {
     let query = "SELECT * FROM employee ";
