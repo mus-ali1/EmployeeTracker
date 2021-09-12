@@ -135,6 +135,57 @@ function initTracker() {
         });
 }
 
+function deleteDepartment() {
+    // display department table so user can easily view all IDs
+    displayAllDepartments();
+
+    inquirer
+        .prompt({
+            name: "departmentId",
+            type: "input",
+            message: "Enter the ID of the department you want to delete",
+        })
+        .then((answer) => {
+            console.log("Deleting department...\n");
+
+            // Connects with our database and runs query to delete department
+            connection.query(
+                "DELETE FROM department WHERE ?",
+                {
+                    id: answer.departmentId,
+                },
+                function (err, res) {
+                    if (err) throw err;
+                    console.log("Department deleted!\n");
+
+                    // initTracker();
+                }
+            );
+
+            // Update the roles table so that roles that were assigned to this now deleted department are updated to have a department id of '0'
+            // which signifies that they are now unassigned to a department
+            connection.query(
+                "UPDATE roles SET ? WHERE ?",
+                [
+                    {
+                        department_id: "0",
+                    },
+                    {
+                        department_id: answer.departmentId,
+                    },
+                ],
+                function (err, res) {
+                    if (err) throw err;
+                    console.log(
+                        "Roles that were assigned to this department have been updated to '0' which signifies that they are now unassigned to a department.\n"
+                    );
+                }
+            );
+
+            initTracker();
+        });
+}
+
 
 
 
@@ -260,8 +311,6 @@ function addEmployee() {
             );
         });
 }
-
-
 
 // This block of code utilises inquirer prompts to allow user to view a chosen table , the answer runs as parameter in .then function which then runs a particualr displayAll function
 //depending on the case i.e if case is department the displayAllDepartments function will run. 
