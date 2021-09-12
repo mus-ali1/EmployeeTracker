@@ -261,6 +261,54 @@ function addEmployee() {
         });
 }
 
+
+
+// This block of code utilises inquirer prompts to allow user to view a chosen table , the answer runs as parameter in .then function which then runs a particualr displayAll function
+//depending on the case i.e if case is department the displayAllDepartments function will run. 
+function viewAll() {
+    inquirer
+        .prompt({
+            name: "table",
+            type: "list",
+            message:
+                "Would you like to view all departments, roles, or employees?",
+            choices: [
+                {
+                    name: "Departments",
+                    value: "department",
+                },
+                {
+                    name: "Roles",
+                    value: "roles",
+                },
+                {
+                    name: "Employees",
+                    value: "employee",
+                },
+            ],
+        })
+        .then(function (answer) {
+            console.log(`Selecting all from ${answer.table}...`);
+
+            switch (answer.table) {
+                case "department":
+                    displayAllDepartments();
+                    break;
+
+                case "roles":
+                    displayAllRoles();
+                    break;
+
+                case "employee":
+                    displayAllEmployees();
+                    break;
+            }
+
+            initTracker();
+        });
+}
+
+
 // This function allows us to query our database and display all employees, utilise console.table to show table of employees on terminal.
 function displayAllEmployees() {
     let query = "SELECT * FROM employee ";
