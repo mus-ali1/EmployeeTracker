@@ -26,7 +26,7 @@ const connection = mysql.createConnection({
     port: 3000,
     user: "root",
     password: process.env.DB_PASSWORD,
-    database: "employeesDB",
+    database: "employee_db",
 });
 
 // This is a error handling function which throws an error if there is no connection to our database and 
