@@ -135,3 +135,10 @@ function initTracker() {
         });
 }
 
+
+// Start our server so that it can begin listening to client requests.
+app.listen(PORT, () => {
+
+    // Log (server-side) when our server has started 
+    console.log(`app listening at http://localhost:${PORT}`);
+});
