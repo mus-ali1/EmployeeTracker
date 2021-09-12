@@ -159,7 +159,7 @@ function addDepartment() {
                 function (err, res) {
                     if (err) throw err;
                     console.log("New department added!\n");
-                    // Call updateProduct AFTER the INSERT completes
+
                     initTracker();
                 }
             );
@@ -167,10 +167,52 @@ function addDepartment() {
 }
 
 
+// This function allows user to add role, this block of code runs when the case addRole in initTracker() is chosen, the user is prompted and a 
+//connection.query function then runs which communicates with the database and inserts new role into the data set, error handling function to confirm 
+//role has being added, if not throw err.
 
-
-
-
+// Validate function added to ensure that the input for salary returns a number 
+function addRole() {
+    inquirer
+        .prompt([
+            {
+                name: "title",
+                type: "input",
+                message: "What is the role title?",
+            },
+            {
+                name: "salary",
+                type: "input",
+                message: "What is this roles salary?",
+                validate: function (value) {
+                    let valid = !isNaN(value);
+                    return valid || "Please enter a number";
+                },
+            },
+            {
+                name: "department_id",
+                type: "input",
+                message: "What is this role's department ID?",
+            },
+        ])
+        .then((answer) => {
+            console.log("Adding a new role...\n");
+            connection.query(
+                `INSERT INTO roles SET ?`,
+                {
+                    title: answer.title,
+                    salary: answer.salary,
+                    department_id: answer.department_id,
+                },
+                function (err, res) {
+                    if (err) throw err;
+                    console.log("New role added!\n");
+                    // Call updateProduct AFTER the INSERT completes
+                    initTracker();
+                }
+            );
+        });
+}
 
 // This function allows us to query our database and display all employees, utilise console.table to show table of employees on terminal.
 function displayAllEmployees() {
