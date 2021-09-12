@@ -186,7 +186,53 @@ function deleteDepartment() {
         });
 }
 
+function deleteRole() {
+    // display department table so user can easily view all IDs
+    displayAllRoles();
 
+    inquirer
+        .prompt({
+            name: "roleId",
+            type: "input",
+            message: "Enter the ID of the role you want to delete",
+        })
+        .then((answer) => {
+            console.log("Deleting role...\n");
+
+            // Deletes role from table
+            connection.query(
+                "DELETE FROM roles WHERE ?",
+                {
+                    id: answer.roleId,
+                },
+                function (err, res) {
+                    if (err) throw err;
+                    console.log("Department deleted!\n");
+                }
+            );
+
+            // Update the employee table so that employees that were assigned to this now deleted role are updated to have a role id of '0' which signifies that they are now unassigned to a department
+            connection.query(
+                "UPDATE employee SET ? WHERE ?",
+                [
+                    {
+                        role_id: "0",
+                    },
+                    {
+                        role_id: answer.roleId,
+                    },
+                ],
+                function (err, res) {
+                    if (err) throw err;
+                    console.log(
+                        "Employees that were assigned to this role have been updated to '0' which signifies that they are now unassigned to a role.\n"
+                    );
+                }
+            );
+
+            initTracker();
+        });
+}
 
 
 
