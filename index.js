@@ -1,15 +1,45 @@
 // Import dependencies
-const connections = require("./connections")
 const inquirer = require("inquirer");
 const cTable = require("console-table");
-
+const mysql = require("mysql2");
+const express = require("express");
 
 // Requires and configure dotenv package
 require('dotenv').config()
 
-const PORT = 3301;
 
-connections.initTracker();
+// This app starts a server
+const app = express();
+
+// This Middleware allows the data being sent to our server in POST and PUT requests to be stored  as JSON object (express.json) ,
+// (express.urlencoded) allows the incoming request object to be recognised as a strings or arrays.
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
+// Creates connection to database
+const connection = mysql.createConnection({
+
+    host: "localhost",
+    port: 3001,
+    user: "root",
+    password: process.env.DB_PASSWORD,
+    database: "employee_db",
+});
+
+// This is a error handling function which throws an error if there is no connection to our database and 
+// runs our initTracker function if the connection is successfull.
+connection.connect(function (err) {
+    if (err) {
+        console.error("error connecting: " + err.stack);
+        return;
+    }
+
+    console.log("connected as id " + connection.threadId);
+
+    initTracker();
+});
+
 
 
 //This function utilises inquirer dependency and through a series of prompts gives the user choices to update the employee tracker management system.
@@ -490,9 +520,3 @@ function displayAllDepartments() {
     });
 }
 
-// Start our server so that it can begin listening to client requests.
-app.listen(PORT, () => {
-
-    // Log (server-side) when our server has started 
-    console.log(`app listening at http://localhost:${PORT}`);
-});
