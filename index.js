@@ -1,16 +1,15 @@
 // Import dependencies
+const connections = require("./connections")
 const inquirer = require("inquirer");
-const express = require("express");
 const cTable = require("console-table");
 
 
 // Requires and configure dotenv package
 require('dotenv').config()
 
-// This app starts a server and listens on port 3000 for connections
-const app = express();
 const PORT = 3301;
 
+connections.initTracker();
 
 
 //This function utilises inquirer dependency and through a series of prompts gives the user choices to update the employee tracker management system.

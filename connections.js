@@ -1,10 +1,12 @@
 const mysql = require("mysql2");
-
+const express = require("express");
 // This Middleware allows the data being sent to our server in POST and PUT requests to be stored  as JSON object (express.json) ,
 // (express.urlencoded) allows the incoming request object to be recognised as a strings or arrays.
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// This app starts a server
+const app = express();
 
 // Creates connection to database
 const connection = mysql.createConnection({
