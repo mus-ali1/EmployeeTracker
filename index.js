@@ -22,10 +22,11 @@ const connection = mysql.createConnection({
     host: "localhost",
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    database: "employee_db",
 
 
 });
+// console.log(process.env.DB_NAME);
 
 // This is a error handling function which throws an error if there is no connection to our database and 
 // runs our initTracker function if the connection is successfull.
@@ -334,7 +335,7 @@ function addDepartment() {
             connection.query(
                 `INSERT INTO department SET ?`,
                 {
-                    department_name: answer.department_name,
+                    name: answer.department_name,
                 },
                 function (err, res) {
                     if (err) throw err;
