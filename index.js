@@ -16,15 +16,14 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 // Creates connection to database
 const connection = mysql.createConnection({
 
     host: "localhost",
-    port: 3001,
     user: "root",
-    password: process.env.DB_PASSWORD,
+    password: "password",
     database: "employee_db",
+
 });
 
 // This is a error handling function which throws an error if there is no connection to our database and 
