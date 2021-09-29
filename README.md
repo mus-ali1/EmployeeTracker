@@ -5,7 +5,7 @@
 
 ### Demo of Application
 
-[Employee Tracker]()
+[Employee Tracker Walk-through](https://www.youtube.com/watch?v=vC1KFeJ1dhM)
 
 
 
@@ -124,9 +124,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 
-## Walk-through Video
 
-##### Video: [Employee Tracker Walk-through](https://www.youtube.com/watch?v=vC1KFeJ1dhM)
 
 
 ## Application Image
