@@ -22,6 +22,11 @@
 - [Walk-through Video](#walk-through-video)
 - [Application Image](#application-image)
 
+
+### Demo of Application
+
+[Employee Tracker Walk-through](https://www.youtube.com/watch?v=vC1KFeJ1dhM)
+
 ## Description
 
 A command line application which utilizes ```node JS``` ```Express``` and ```Mysql``` to provide a useful and
