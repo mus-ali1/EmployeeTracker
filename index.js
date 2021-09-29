@@ -434,7 +434,7 @@ function addEmployee() {
                 },
                 function (err, res) {
                     if (err) throw err;
-                    console.log("New role added!\n");
+                    console.log("New employee added!\n");
                     // Call updateProduct AFTER the INSERT completes
                     initTracker();
                 }
